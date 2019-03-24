@@ -28,6 +28,8 @@ complete: Boolean!
   }
   type Mutation {
       createUser( name: String!, bio: String!, style: String!, image_url: String!, strength: String! ): User
+      updateUser( id: ID!, complete: Boolean!): Boolean
+      removeUser( id: ID!): Boolean
   }
 `;
 
@@ -48,6 +50,14 @@ const resolvers = {
       });
       await user.save();
       return user;
+    },
+    updateUser: async (_, { id, complete }) => {
+      await User.findByIdAndUpdate(id, { complete });
+      return true;
+    },
+    removeUser: async (_, { id }) => {
+      await User.findByIdAndRemove(id);
+      return true;
     }
   }
 };
