@@ -1,42 +1,28 @@
 import React, { Component } from "react";
-import gql from "graphql-tag";
-import { graphql } from "react-apollo";
+import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
+import "./App.css";
 
-const UsersQuery = gql`
-  {
-    users {
-      id
-      name
-      bio
-      style
-      image_url
-      strength
-      complete
-    }
-  }
-`;
+import { Container } from "semantic-ui-react";
+import Navbar from "./component/Navbar.jsx";
+
+import LocationForm from "./component/LocationForm";
 
 class App extends Component {
   render() {
-    const {
-      data: { loading, users }
-    } = this.props;
-    if (loading) {
-      return null;
-    } else
-      return (
-        <div>
-          {" "}
-          {users.map(user => (
-            <div key={user.id}>
-              {" "}
-              {user.name} {user.bio} {user.style} {user.image_url}{" "}
-              {user.strength}{" "}
-            </div>
-          ))}{" "}
-        </div>
-      );
+    return (
+      <Router>
+        <Container className="App">
+          <Navbar />
+          <Route
+            exact
+            path="/"
+            component={() => <Redirect to="/locations" />}
+          />
+          <Route path="/locations" component={LocationForm} />
+        </Container>
+      </Router>
+    );
   }
 }
 
-export default graphql(UsersQuery)(App);
+export default App;
