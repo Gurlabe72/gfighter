@@ -1,8 +1,5 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
 import { Form, Button, Card, Dropdown } from "semantic-ui-react";
-import { bindActionCreators } from "redux";
-import { createLocations } from "../Redux/actions/locations.actions";
 
 const options = [
   {
@@ -55,95 +52,93 @@ class LocationForm extends Component {
 
   render() {
     return (
-      <div style={{ marginBottom: "2em" }}>
+      <div
+        style={{
+          marginBottom: "2em"
+        }}
+      >
         <Card fluid>
           <Card.Content>
+            {" "}
             {!this.state.visible ? (
               <Form onSubmit={this.handleSubmit}>
                 <Form.Field>
-                  <h1>Locations</h1>
-                  <label htmlFor="location">Location</label>
+                  <h1> Fighter </h1>{" "}
+                  <label htmlFor="location"> Location </label>{" "}
                   <input
                     placeholder="Location"
                     name="location"
-                    onChange={e => this.setState({ location: e.target.value })}
-                  />
-                </Form.Field>
-                <Form.Field>
-                  <label htmlFor="postType">Where are you?</label>
-                  <Dropdown
-                    placeholder="What is it?"
-                    fluid
-                    selection
-                    options={options}
                     onChange={e =>
-                      this.setState({ postType: e.target.innerText })
+                      this.setState({
+                        location: e.target.value
+                      })
                     }
-                  />
-                </Form.Field>
-
+                  />{" "}
+                </Form.Field>{" "}
                 {(() => {
                   switch (this.state.postType) {
                     case "On the Road":
                       return (
                         <div>
-                          <h1>On the Road</h1>
+                          <h1> On the Road </h1>{" "}
                           <Form.Field>
                             <label htmlFor="accidents">
-                              What should the Fighters name?
-                            </label>
+                              What should the Fighters name ?
+                            </label>{" "}
                             <input
                               placeholder="Name..."
                               name="accidents"
                               onChange={e =>
-                                this.setState({ accidents: e.target.value })
+                                this.setState({
+                                  accidents: e.target.value
+                                })
                               }
-                            />
-                          </Form.Field>
+                            />{" "}
+                          </Form.Field>{" "}
                           <Form.Field>
-                            <label htmlFor="hazards">Please right a bio?</label>
+                            <label htmlFor="hazards">
+                              {" "}
+                              Please right a bio ?{" "}
+                            </label>{" "}
                             <input
                               placeholder="Write about yourself.."
                               name="hazards"
                               onChange={e =>
-                                this.setState({ hazards: e.target.value })
+                                this.setState({
+                                  hazards: e.target.value
+                                })
                               }
-                            />
-                          </Form.Field>
+                            />{" "}
+                          </Form.Field>{" "}
                           <Form.Field>
                             <label htmlFor="delays">
-                              What kind of stregth does he carry?
-                            </label>
+                              What kind of stregth does he carry ?
+                            </label>{" "}
                             <input
                               placeholder="Strength 1-100"
                               name="delays"
                               onChange={e =>
-                                this.setState({ delays: e.target.value })
+                                this.setState({
+                                  delays: e.target.value
+                                })
                               }
-                            />
-                          </Form.Field>
+                            />{" "}
+                          </Form.Field>{" "}
                         </div>
                       );
 
                     default:
                       return null;
                   }
-                })()}
-                <Button type="submit">Submit</Button>
+                })()}{" "}
+                <Button type="submit"> Submit </Button>{" "}
               </Form>
-            ) : null}
-          </Card.Content>
-        </Card>
+            ) : null}{" "}
+          </Card.Content>{" "}
+        </Card>{" "}
       </div>
     );
   }
 }
-const mapDispatchToProps = dispatch => {
-  return {
-    createLocations: bindActionCreators(createLocations, dispatch)
-  };
-};
-export default connect(
-  null,
-  mapDispatchToProps
-)(LocationForm);
+
+export default LocationForm;
